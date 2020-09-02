@@ -60,7 +60,7 @@ import java.text.SimpleDateFormat
 /**
  * Returns a string representing the numeric quality rating.
  */
-class TextItemViewHolder(val textView: TextView): RecyclerView.ViewHolder(textView){}
+class TextItemViewHolder(val textView: TextView): RecyclerView.ViewHolder(textView)
 
 
 fun convertNumericQualityToString(quality: Int, resources: Resources): String {
