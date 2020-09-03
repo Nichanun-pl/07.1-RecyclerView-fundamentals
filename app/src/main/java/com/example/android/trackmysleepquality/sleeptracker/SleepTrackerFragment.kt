@@ -69,10 +69,6 @@ class SleepTrackerFragment : Fragment() {
         // give the binding object a reference to it.
         binding.sleepTrackerViewModel = sleepTrackerViewModel
 
-        // Specify the current activity as the lifecycle owner of the binding.
-        // This is necessary so that the binding can observe LiveData updates.
-        binding.setLifecycleOwner(this)
-
         val adapter = SleepNightAdapter()
         binding.sleepList.adapter = adapter
 
@@ -81,6 +77,11 @@ class SleepTrackerFragment : Fragment() {
                 adapter.data = it
             }
         })
+
+        // Specify the current activity as the lifecycle owner of the binding.
+        // This is necessary so that the binding can observe LiveData updates.
+        binding.setLifecycleOwner(this)
+
         // Add an Observer on the state variable for showing a Snackbar message
         // when the CLEAR button is pressed.
         sleepTrackerViewModel.showSnackBarEvent.observe(viewLifecycleOwner, Observer {

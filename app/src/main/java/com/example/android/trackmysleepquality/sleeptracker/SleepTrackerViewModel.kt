@@ -39,6 +39,7 @@ class SleepTrackerViewModel(
      */
     val database = dataSource
 
+
     private var tonight = MutableLiveData<SleepNight?>()
 
     val nights = database.getAllNights()
@@ -70,6 +71,7 @@ class SleepTrackerViewModel(
     val clearButtonVisible = Transformations.map(nights) {
         it?.isNotEmpty()
     }
+
 
     /**
      * Request a toast by setting this value to true.
@@ -129,29 +131,29 @@ class SleepTrackerViewModel(
 
     /**
      *  Handling the case of the stopped app or forgotten recording,
-     *  the start and end times will be the same.j
+     *  the start and end times will be the same.
      *
      *  If the start time and end time are not the same, then we do not have an unfinished
      *  recording.
      */
     private suspend fun getTonightFromDatabase(): SleepNight? {
-            var night = database.getTonight()
-            if (night?.endTimeMilli != night?.startTimeMilli) {
-                night = null
-            }
-            return night
+        var night = database.getTonight()
+        if (night?.endTimeMilli != night?.startTimeMilli) {
+            night = null
+        }
+        return night
     }
 
     private suspend fun insert(night: SleepNight) {
-            database.insert(night)
+        database.insert(night)
     }
 
     private suspend fun update(night: SleepNight) {
-            database.update(night)
+        database.update(night)
     }
 
     private suspend fun clear() {
-            database.clear()
+        database.clear()
     }
 
     /**
